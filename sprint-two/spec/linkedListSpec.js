@@ -23,6 +23,18 @@ describe('linkedList', function() {
     expect(linkedList.tail.value).to.equal(5);
   });
 
+  it('should add multiple nodes', function(){
+    linkedList.addToTail(3);
+    linkedList.addToTail(4);
+    linkedList.addToTail(5);
+    expect(linkedList.head.value).to.equal(3);
+    expect(linkedList.head.next.value).to.equal(4);
+    expect(linkedList.head.next.next.value).to.equal(5);
+    expect(linkedList.tail.value).to.equal(5);
+
+  });
+
+
   it('should remove the head from the list when removeHead is called', function(){
     linkedList.addToTail(4);
     linkedList.addToTail(5);
@@ -35,6 +47,16 @@ describe('linkedList', function() {
     linkedList.addToTail(4);
     expect(linkedList.removeHead()).to.equal(4);
   });
+
+  // it('should have an inner recursive function', function() {
+  //   expect(linkedList.contains.checkNodes).to.be.a("function");
+  // });
+
+  it("should find a value on a linkedList with only one value", function(){
+    linkedList.addToTail(4);
+    expect(linkedList.contains(4)).to.equal(true);
+  });
+
 
   it("should contain a value that was added", function(){
     linkedList.addToTail(4);
