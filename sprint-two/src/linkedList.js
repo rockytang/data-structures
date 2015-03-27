@@ -28,9 +28,9 @@ var LinkedList = function(){
 
   list.contains = function(target, nodeList){
 
-    nodeList = nodeList || list.head
+    nodeList = nodeList || list.head;
 
-     if(nodeList.value === target){
+    if(nodeList.value === target){
       return true;
     } else if(nodeList.next === null){
       return false;
