@@ -4,24 +4,29 @@ var HashTable = function(){
 };
 
 HashTable.prototype.insert = function(k, v){
-  var i = getIndexBelowMaxForKey(k, this._limit);
-  // i is the key to ._storage
-  // we need to SET ._storage[i] = [[k,v]] for the first iteration
-  // if ._storage[i][0] === an array, then we need to SET ._storage[i][0].push([k,v])
-  // debugger
-  // if(this._storage[i] === undefined){
-    this._storage.set(i, [[k,v]]);
-  // } else {
-    // this._storage.set(i, [k,v]);
-  // }
-    // this._storage.set(i, v);
+  var index = getIndexBelowMaxForKey(k, this._limit);
+
+
+  var bucket = this._storage.get(index) || [];
+  var changed = false;
+  for(var i = 0; i < bucket.length; i ++){
+    if(bucket[i][0] === k ){
+      bucket[i][1] = v;
+      changed = true;
+    }
+  }
+  if(!changed) {
+      bucket.push([k,v])
+  }
+
+
+  this._storage.set(index, bucket);
 
 };
 
 HashTable.prototype.retrieve = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
   //.get on i
-  debugger;
   // make storage = return value of .get(i)   --> this returns the bucket and lets us play with it
   // make for loop that iterates through each tupil of the bucket until we find one that matches k
   // return value
@@ -39,7 +44,15 @@ HashTable.prototype.retrieve = function(k){
 
 HashTable.prototype.remove = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
-  this._storage.set(i, null)
+
+  var bucket = this._storage.get(i);
+
+  for(var j = 0; j < bucket.length; j++){
+    if(bucket[j][0] === k) {
+      bucket[j][1] = null;
+    }
+  }
+  this._storage.set(i, bucket)
 
 };
 
