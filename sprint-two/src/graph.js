@@ -1,5 +1,3 @@
-
-
 var Graph = function(){
   this.storage = {};
   this.edges = [];
@@ -20,7 +18,6 @@ Graph.prototype.contains = function(node){
 
 Graph.prototype.removeNode = function(node){
   delete this.storage[node];
-  //don't forget to delete the edge
 };
 
 Graph.prototype.hasEdge = function(fromNode, toNode){
@@ -40,17 +37,12 @@ Graph.prototype.addEdge = function(fromNode, toNode){
 };
 
 Graph.prototype.removeEdge = function(fromNode, toNode){
-  // for(var i = 0; i < this.edges.length; i++){
-  //   if(this.edges[i][0] === fromNode && this.edges[i][1] === toNode){
-  //     this.edges.splice(i,1);
-  //   }
-  // }
+
   _.each(this.edges, function(edge, i, edgesArray){
     if(edge[0] === fromNode && edge[1] === toNode){
       edgesArray.splice(i,1);
     }
-  })
-
+  });
 };
 
 Graph.prototype.forEachNode = function(iterator){

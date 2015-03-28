@@ -8,12 +8,12 @@ var BinarySearchTree = function(value){
   _.extend(tree, binaryFunctions);
 
   return tree;
-
 };
 
 var binaryFunctions = {};
 
 binaryFunctions.insert = function(value){
+
   var newTree = BinarySearchTree(value)
 
   if(value < this.value && this.left === undefined) {
@@ -31,6 +31,7 @@ binaryFunctions.insert = function(value){
 binaryFunctions.contains = function(value){
 
   var result = false;
+
   if(value === this.value){
     result = true;
   }else if (value < this.value && this.left !== undefined){
@@ -52,8 +53,6 @@ binaryFunctions.depthFirstLog = function(iterator){
   if(this.right !== undefined) {
     this.right.depthFirstLog(iterator);
   }
-
-
 }
 
 
