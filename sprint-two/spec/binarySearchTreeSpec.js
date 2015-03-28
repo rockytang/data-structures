@@ -11,6 +11,13 @@ describe('binarySearchTree', function() {
     expect(binarySearchTree.depthFirstLog).to.be.a("function");
   });
 
+  it('should insert a value', function(){
+    binarySearchTree.insert(2);
+    binarySearchTree.insert(6);
+    expect(binarySearchTree.left.value).to.equal(2);
+    expect(binarySearchTree.right.value).to.equal(6);
+  });
+
   it('should insert values at the correct location in the tree', function(){
     binarySearchTree.insert(2);
     binarySearchTree.insert(3);
@@ -26,6 +33,16 @@ describe('binarySearchTree', function() {
     binarySearchTree.insert(7);
     expect(binarySearchTree.contains(7)).to.equal(true);
     expect(binarySearchTree.contains(8)).to.equal(false);
+  });
+
+  it('contains should search on both sides', function(){
+    binarySearchTree.insert(2);
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(7);
+    binarySearchTree.insert(6);
+    expect(binarySearchTree.contains(7)).to.equal(true);
+    expect(binarySearchTree.contains(8)).to.equal(false);
+    expect(binarySearchTree.contains(6)).to.equal(true);
   });
 
   it('should execute a callback on every value in a tree using "depthFirstLog"', function(){

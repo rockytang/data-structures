@@ -24,14 +24,15 @@ Graph.prototype.removeNode = function(node){
 };
 
 Graph.prototype.hasEdge = function(fromNode, toNode){
-  for(var i = 0; i < this.edges.length; i++){
-    var comparison1 = (this.edges[i][0] === fromNode) && (this.edges[i][1] === toNode);
-    var comparison2 = (this.edges[i][1] === fromNode) && (this.edges[i][0] === toNode);
+  var result = false;
+  _.each(this.edges, function(edge){
+    var comparison1 = (edge[0] === fromNode) && (edge[1] === toNode);
+    var comparison2 = (edge[1] === fromNode) && (edge[0] === toNode);
     if(comparison1 || comparison2){
-      return true;
+      result = true;
     }
-  }
-  return false;
+  });
+  return result;
 };
 
 Graph.prototype.addEdge = function(fromNode, toNode){
@@ -39,11 +40,17 @@ Graph.prototype.addEdge = function(fromNode, toNode){
 };
 
 Graph.prototype.removeEdge = function(fromNode, toNode){
-  for(var i = 0; i < this.edges.length; i++){
-    if(this.edges[i][0] === fromNode && this.edges[i][1] === toNode){
-      this.edges.splice(i,1);
+  // for(var i = 0; i < this.edges.length; i++){
+  //   if(this.edges[i][0] === fromNode && this.edges[i][1] === toNode){
+  //     this.edges.splice(i,1);
+  //   }
+  // }
+  _.each(this.edges, function(edge, i, edgesArray){
+    if(edge[0] === fromNode && edge[1] === toNode){
+      edgesArray.splice(i,1);
     }
-  }
+  })
+
 };
 
 Graph.prototype.forEachNode = function(iterator){
